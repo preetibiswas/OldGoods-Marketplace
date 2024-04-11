@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "565763657476",
+    "project_id": "awee-9f0b8",
+    "storage_bucket": "awee-9f0b8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:565763657476:android:1c636a7c6a235e64734a51",
+        "android_client_info": {
+          "package_name": "com.awe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRuZs5PZ6R2paZ45kmjzW1e1oKtKMNPH8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
