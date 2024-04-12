@@ -16,15 +16,10 @@ import colors from './App/Config/colors';
 import AppText from './App/component/AppText';
 import AppButton from './App/component/AppButton';
 import AppCard from './App/component/AppCard';
+import ListDetailScreen from './App/Screens/ListDetailScreen';
 
 export default function App() {
-  return (
-    <ScrollView>
-      <AppCard title="Red jacket for sale" subtitle="$100" />
-      <AppCard title="Red jacket for sale" subtitle="$100" />
-      <AppCard title="Red jacket for sale" subtitle="$100" />
-    </ScrollView>
-  );
+  return <ListDetailScreen title="Red jacket for sale" subtitle="$100" />;
 }
 
 const styles = StyleSheet.create({
