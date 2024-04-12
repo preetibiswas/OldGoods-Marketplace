@@ -17,9 +17,15 @@ import AppText from './App/component/AppText';
 import AppButton from './App/component/AppButton';
 import AppCard from './App/component/AppCard';
 import ListDetailScreen from './App/Screens/ListDetailScreen';
+import MessageScreen from './App/Screens/MessageScreen';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 export default function App() {
-  return <ListDetailScreen title="Red jacket for sale" subtitle="$100" />;
+  return (
+    <GestureHandlerRootView style={{flex: 1}}>
+      <MessageScreen />
+    </GestureHandlerRootView>
+  );
 }
 
 const styles = StyleSheet.create({

@@ -1,18 +1,36 @@
 /* eslint-disable prettier/prettier */
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import AppText from './AppText';
 import colors from '../Config/colors';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
 
-export default function ListItem({image, title, subtitle}) {
+export default function ListItem({
+  image,
+  title,
+  subtitle,
+  onPress,
+  renderRightActions,
+}) {
   return (
-    <View style={styles.cont}>
-      <Image source={image} style={styles.img} />
-      <View>
-        <AppText style={styles.title}>{title}</AppText>
-        <AppText style={styles.subtitle}>{subtitle}</AppText>
-      </View>
-    </View>
+    <Swipeable renderRightActions={renderRightActions}>
+      <TouchableHighlight underlayColor={colors.light} onPress={onPress}>
+        <View style={styles.cont}>
+          <Image source={image} style={styles.img} />
+          <View>
+            <AppText style={styles.title}>{title}</AppText>
+            <AppText style={styles.subtitle}>{subtitle}</AppText>
+          </View>
+        </View>
+      </TouchableHighlight>
+    </Swipeable>
   );
 }
 
@@ -25,6 +43,8 @@ const styles = StyleSheet.create({
   },
   cont: {
     flexDirection: 'row',
+    padding: 15,
+    backgroundColor: colors.white,
   },
   title: {
     fontWeight: '500',
