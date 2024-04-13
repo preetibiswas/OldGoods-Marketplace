@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import React from 'react';
 
-export default function Screen({children}) {
-  return <SafeAreaView style={styles.cont}>{children}</SafeAreaView>;
+export default function Screen({children, style}) {
+  return <SafeAreaView style={[styles.cont, style]}>{children}</SafeAreaView>;
 }
 
 const styles = StyleSheet.create({
