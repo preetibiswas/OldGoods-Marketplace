@@ -22,11 +22,12 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import AppIcon from './App/component/AppIcon';
 import ListItem from './App/component/ListItem';
 import AccountScreen from './App/Screens/AccountScreen';
+import ListingScreen from './App/Screens/ListingScreen';
 
 export default function App() {
   return (
     <GestureHandlerRootView style={{flex: 1}}>
-      <AccountScreen />
+      <ListingScreen />
     </GestureHandlerRootView>
   );
 }

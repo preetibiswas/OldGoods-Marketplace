@@ -4,10 +4,10 @@ import React from 'react';
 import colors from '../Config/colors';
 import AppText from './AppText';
 
-export default function AppCard({title, subtitle}) {
+export default function AppCard({title, subtitle, image}) {
   return (
     <View style={styles.card}>
-      <Image source={require('../assets/jacket.jpg')} style={styles.img} />
+      <Image source={image} style={styles.img} />
       <View style={styles.detailContainer}>
         <AppText style={styles.title}>{title}</AppText>
         <AppText style={styles.subtitle}>{subtitle}</AppText>
