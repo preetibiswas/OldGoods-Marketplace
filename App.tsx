@@ -26,12 +26,32 @@ import ListItem from './App/component/ListItem';
 import AccountScreen from './App/Screens/AccountScreen';
 import ListingScreen from './App/Screens/ListingScreen';
 import AppTextInput from './App/component/AppTextInput';
+import {Picker} from '@react-native-picker/picker';
+import AppPicker from './App/component/AppPicker';
 
 export default function App() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+
   const [isEnabled, setIsEnabled] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState();
+  console.log(selectedLanguage);
   const toggleSwitch = () => setIsEnabled(prevstate => !prevstate);
+  const categories = [
+    {
+      label: 'Furniture',
+      value: 1,
+    },
+    {
+      label: 'Clothing',
+      value: 2,
+    },
+    {
+      label: 'Camera',
+      value: 3,
+    },
+  ];
+  const [catList, setCatList] = useState(categories[0]);
   return (
     <GestureHandlerRootView style={{flex: 1}}>
       <Switch
@@ -40,6 +60,23 @@ export default function App() {
         trackColor={{false: '#767577', true: '#81b0ff'}}
         thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
         ios_backgroundColor="#3e3e3e"
+      />
+      <Picker
+        selectedValue={selectedLanguage}
+        onValueChange={(itemValue, itemIndex) => {
+          console.log(itemValue);
+          setSelectedLanguage(itemValue);
+        }}
+      >
+        <Picker.Item label="Java" value="java" />
+        <Picker.Item label="JavaScript" value="js" />
+      </Picker>
+      <AppPicker
+        icon="apps"
+        placeholder="category"
+        category={categories}
+        selectedItem={catList}
+        onSelectItem={item => setCatList(item)}
       />
     </GestureHandlerRootView>
   );
