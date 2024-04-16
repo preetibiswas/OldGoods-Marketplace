@@ -5,7 +5,7 @@ import React from 'react';
 export default function AppText({children, style}) {
   return (
     <View style={style}>
-      <Text style={[styles.txt]}>{children}</Text>
+      <Text style={[styles.txt, style]}>{children}</Text>
     </View>
   );
 }
