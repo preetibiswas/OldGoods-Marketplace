@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import AppTextInput from './AppTextInput';
+import AppTextInput from '../AppTextInput';
 import ErrorComponent from './ErrorComponent';
 import {useFormikContext} from 'formik';
 

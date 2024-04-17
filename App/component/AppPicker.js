@@ -18,7 +18,7 @@ import AppText from './AppText';
 export default function AppPicker({
   icon,
   placeholder,
-  category,
+  items,
   selectedItem,
   onSelectItem,
 }) {
@@ -36,7 +36,12 @@ export default function AppPicker({
             />
           )}
           <AppText style={styles.txt}>
-            {selectedItem ? selectedItem.label : placeholder}
+            {/* {selectedItem ? selectedItem.label : placeholder} */}
+            {selectedItem ? (
+              <AppText style={styles.itemTxt}>{selectedItem.label}</AppText>
+            ) : (
+              <AppText style={styles.placeholder}>{placeholder}</AppText>
+            )}
           </AppText>
           <Icon name="chevron-down" size={20} color={colors.medium} />
         </View>
@@ -44,7 +49,7 @@ export default function AppPicker({
       <Modal visible={showModal} animationType="slide">
         <Button title="close" onPress={() => setShowModal(false)} />
         <FlatList
-          data={category}
+          data={items}
           key={item => item.value.toString()}
           renderItem={({item}) => (
             <PickerItem
@@ -86,6 +91,10 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   txt: {
+    flex: 1,
+  },
+  placeholder: {
+    color: colors.medium,
     flex: 1,
   },
 });

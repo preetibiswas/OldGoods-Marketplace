@@ -2,20 +2,14 @@
 import {StyleSheet, Text, View, StatusBar, Image} from 'react-native';
 import React, {useState} from 'react';
 import Screen from '../component/Screen';
-import {Formik} from 'formik';
-import AppTextInput from '../component/AppTextInput';
-import AppButton from '../component/AppButton';
+
 import colors from '../Config/colors';
 import * as yup from 'yup';
-import AppText from '../component/AppText';
-import ErrorComponent from '../component/ErrorComponent';
-import AppFormField from '../component/AppFormField';
-import SubmitButton from '../component/SubmitButton';
-import AppForm from '../component/AppForm';
+import AppFormField from '../component/Forms/AppFormField';
+import SubmitButton from '../component/Forms/SubmitButton';
+import AppForm from '../component/Forms/AppForm';
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState();
   const validationSchema = yup.object().shape({
     email: yup
       .string()
