@@ -9,6 +9,9 @@ import colors from '../Config/colors';
 import * as yup from 'yup';
 import AppText from '../component/AppText';
 import ErrorComponent from '../component/ErrorComponent';
+import AppFormField from '../component/AppFormField';
+import SubmitButton from '../component/SubmitButton';
+import AppForm from '../component/AppForm';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -28,50 +31,30 @@ export default function Login() {
     <Screen style={styles.container}>
       <StatusBar backgroundColor={colors.primary} />
       <Image source={require('../assets/logo-red.png')} style={styles.img} />
-      <Formik
+      <AppForm
         validationSchema={validationSchema}
         initialValues={{email: '', password: ''}}
         onSubmit={values => console.log(values)}
       >
-        {({
-          onBlur,
-          handleChange,
-          handleSubmit,
-          handleBlur,
-          values,
-          errors,
-          setFieldTouched,
-          touched,
-        }) => (
-          <>
-            <AppTextInput
-              placeholder={'Email'}
-              icon="email"
-              autoCapitalize="none"
-              onChangeText={handleChange('email')}
-              value={values.email}
-              onBlur={() => setFieldTouched('email')}
-            />
-            <ErrorComponent error={errors.email} visible={touched.email} />
+        <>
+          <AppFormField
+            placeholder={'Email'}
+            icon="email"
+            name="email"
+            autoCapitalize="none"
+          />
 
-            <AppTextInput
-              onBlur={() => setFieldTouched('password')}
-              placeholder={'Password'}
-              icon="lock"
-              textContentType="password"
-              onChangeText={handleChange('password')}
-              keyboardType="numeric"
-              value={values.password}
-            />
-            <ErrorComponent
-              error={errors.password}
-              visible={touched.password}
-            />
+          <AppFormField
+            name="password"
+            placeholder={'Password'}
+            icon="lock"
+            textContentType="password"
+            keyboardType="numeric"
+          />
 
-            <AppButton onPress={handleSubmit} title="Login" />
-          </>
-        )}
-      </Formik>
+          <SubmitButton title={'Login'} />
+        </>
+      </AppForm>
     </Screen>
   );
 }
