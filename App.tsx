@@ -30,6 +30,7 @@ import {Picker} from '@react-native-picker/picker';
 import AppPicker from './App/component/AppPicker';
 import Login from './App/Screens/Login';
 import ListEditScreen from './App/Screens/ListEditScreen';
+import RegistrationScreen from './App/Screens/RegistrationScreen';
 
 export default function App() {
   const [name, setName] = useState('');
@@ -56,7 +57,7 @@ export default function App() {
   const [catList, setCatList] = useState(categories[0]);
   return (
     <GestureHandlerRootView style={{flex: 1}}>
-      <ListEditScreen />
+      <Login />
     </GestureHandlerRootView>
   );
 }

@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
-import {StyleSheet, Text, View, StatusBar, Image} from 'react-native';
+import {StyleSheet, Text, View, StatusBar, Image, Alert} from 'react-native';
 import React, {useState} from 'react';
 import Screen from '../component/Screen';
+import auth from '@react-native-firebase/auth';
 
 import colors from '../Config/colors';
 import * as yup from 'yup';
@@ -21,6 +22,27 @@ export default function Login() {
       .label('Password')
       .required(),
   });
+  const handleLogin = values => {
+    const {email, password} = values;
+    auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(res => {
+        const uid = res.user.uid;
+        Alert.alert(uid);
+        console.log('signed in');
+      })
+      .catch(error => {
+        if (error.code === 'auth/email-already-in-use') {
+          console.log('That email address is already in use!');
+        }
+
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+        }
+
+        console.error(error);
+      });
+  };
   return (
     <Screen style={styles.container}>
       <StatusBar backgroundColor={colors.primary} />
@@ -28,7 +50,7 @@ export default function Login() {
       <AppForm
         validationSchema={validationSchema}
         initialValues={{email: '', password: ''}}
-        onSubmit={values => console.log(values)}
+        onSubmit={values => handleLogin(values)}
       >
         <>
           <AppFormField
