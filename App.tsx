@@ -81,7 +81,7 @@ export default function App() {
           />
         )} */}
         {/* <Button title="Choose from Device" onPress={openImagePicker} /> */}
-        <ImageInput
+        {/* <ImageInput
           imguri={selectedImage}
           onChangeImage={imageUri => setSelectedImage(imageUri)}
         />
@@ -89,7 +89,8 @@ export default function App() {
           imageUris={imageuris}
           onAddImage={handleAdd}
           onRemoveImage={handleRemove}
-        />
+        /> */}
+        <ListEditScreen />
       </View>
     </GestureHandlerRootView>
   );
