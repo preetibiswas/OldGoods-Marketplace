@@ -8,6 +8,7 @@ import * as yup from 'yup';
 import AppFormPicker from '../component/AppFormPicker';
 import ImageInputList from '../component/ImageInputList';
 import FormImagePicker from '../component/Forms/FormImagePicker';
+import firestore from '@react-native-firebase/firestore';
 
 export default function ListEditScreen() {
   const categories = [
@@ -23,6 +24,15 @@ export default function ListEditScreen() {
     description: yup.string().label('Description').required(),
     category: yup.object().required().nullable().label('category'),
   });
+  const submitValue = value => {
+    console.log('submit form', value);
+    return firestore()
+      .collection('ListingDetail')
+      .add(value)
+      .then(async user => {
+        console.log(user);
+      });
+  };
   return (
     <Screen style={styles.scrn}>
       <StatusBar backgroundColor={colors.primary} />
@@ -35,7 +45,7 @@ export default function ListEditScreen() {
           category: '',
           description: '',
         }}
-        onSubmit={values => console.log(values)}
+        onSubmit={submitValue}
       >
         <>
           <FormImagePicker name="images" />

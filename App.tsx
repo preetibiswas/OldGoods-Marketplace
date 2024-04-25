@@ -33,14 +33,13 @@ import AppPicker from './App/component/AppPicker';
 import Login from './App/Screens/Login';
 import ListEditScreen from './App/Screens/ListEditScreen';
 import RegistrationScreen from './App/Screens/RegistrationScreen';
-
-import ImageInput from './App/component/ImageInput';
-import ImageInputList from './App/component/ImageInputList';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import AuthNavigator from './App/navigator/AuthNavigator';
 
 export default function App() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [imageuris, setImageuris] = useState([]);
 
   const [isEnabled, setIsEnabled] = useState(false);
@@ -48,12 +47,6 @@ export default function App() {
   console.log(selectedLanguage);
   const toggleSwitch = () => setIsEnabled(prevstate => !prevstate);
 
-  const handleAdd = uri => {
-    setImageuris([...imageuris, uri]);
-  };
-  const handleRemove = uri => {
-    setImageuris(imageuris.filter(img => img !== uri));
-  };
   const categories = [
     {
       label: 'Furniture',
@@ -72,26 +65,9 @@ export default function App() {
   const [catList, setCatList] = useState(categories[0]);
   return (
     <GestureHandlerRootView style={{flex: 1}}>
-      <View style={{marginTop: 20}}>
-        {/* {selectedImage && (
-          <Image
-            source={{uri: selectedImage}}
-            resizeMode="contain"
-            style={{width: 100, height: 100}}
-          />
-        )} */}
-        {/* <Button title="Choose from Device" onPress={openImagePicker} /> */}
-        {/* <ImageInput
-          imguri={selectedImage}
-          onChangeImage={imageUri => setSelectedImage(imageUri)}
-        />
-        <ImageInputList
-          imageUris={imageuris}
-          onAddImage={handleAdd}
-          onRemoveImage={handleRemove}
-        /> */}
-        <ListEditScreen />
-      </View>
+      <NavigationContainer>
+        <AuthNavigator />
+      </NavigationContainer>
     </GestureHandlerRootView>
   );
 }

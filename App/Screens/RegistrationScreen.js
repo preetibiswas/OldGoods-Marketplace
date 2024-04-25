@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import {StatusBar, StyleSheet, Text, View} from 'react-native';
+import {Alert, StatusBar, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import * as yup from 'yup';
 import Screen from '../component/Screen';
@@ -14,6 +14,7 @@ export default function RegistrationScreen() {
     auth()
       .createUserWithEmailAndPassword(values.email, values.password)
       .then(async () => {
+        Alert.alert(`${values.Uname} Account created and signed in `);
         console.log('User account created & signed in!');
         // Save additional user data to Firebase Storage
         firestore()
