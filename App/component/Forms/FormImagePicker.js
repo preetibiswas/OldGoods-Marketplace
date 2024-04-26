@@ -8,7 +8,7 @@ import ErrorComponent from './ErrorComponent';
 export default function FormImagePicker({name}) {
   const {errors, setFieldValue, touched, values} = useFormikContext();
   const handleAdd = uri => {
-    console.log('added');
+    console.log('added', uri);
     setFieldValue(name, [...values[name], uri]);
   };
   const handleRemove = uri => [
