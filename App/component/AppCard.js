@@ -1,18 +1,26 @@
 /* eslint-disable prettier/prettier */
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import React from 'react';
 import colors from '../Config/colors';
 import AppText from './AppText';
 
-export default function AppCard({title, subtitle, image}) {
+export default function AppCard({title, subtitle, image, onPress}) {
   return (
-    <View style={styles.card}>
-      <Image source={image} style={styles.img} />
-      <View style={styles.detailContainer}>
-        <AppText style={styles.title}>{title}</AppText>
-        <AppText style={styles.subtitle}>{subtitle}</AppText>
+    <TouchableWithoutFeedback onPress={onPress}>
+      <View style={styles.card}>
+        <Image source={image} style={styles.img} />
+        <View style={styles.detailContainer}>
+          <AppText style={styles.title}>{title}</AppText>
+          <AppText style={styles.subtitle}>{subtitle}</AppText>
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 

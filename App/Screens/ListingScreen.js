@@ -34,12 +34,12 @@ const listings = [
   },
 ];
 
-export default function ListingScreen() {
+export default function ListingScreen({navigation}) {
   return (
     <Screen>
       <StatusBar backgroundColor={colors.secondary} />
 
-      <ScrollView>
+      <View>
         <FlatList
           data={listings}
           keyExtractor={item => item.id.toString()}
@@ -48,10 +48,11 @@ export default function ListingScreen() {
               title={item.title}
               subtitle={item.price}
               image={item.image}
+              onPress={() => navigation.navigate('ListingDetail', item)}
             />
           )}
         />
-      </ScrollView>
+      </View>
     </Screen>
   );
 }

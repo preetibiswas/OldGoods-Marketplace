@@ -38,6 +38,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AuthNavigator from './App/navigator/AuthNavigator';
+import AppNavigator from './App/navigator/AppNavigation';
 
 export default function App() {
   const [imageuris, setImageuris] = useState([]);
@@ -66,7 +67,7 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{flex: 1}}>
       <NavigationContainer>
-        <AuthNavigator />
+        <AppNavigator />
       </NavigationContainer>
     </GestureHandlerRootView>
   );

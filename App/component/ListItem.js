@@ -16,13 +16,14 @@ export default function ListItem({
   image,
   title,
   subtitle,
-  onPress,
+  onpress,
   renderRightActions,
   ImageComponent,
+  onPress,
 }) {
   return (
     <Swipeable renderRightActions={renderRightActions}>
-      <TouchableHighlight underlayColor={colors.light} onPress={onPress}>
+      <TouchableHighlight underlayColor={colors.light} onPress={onpress}>
         <View style={styles.cont}>
           {ImageComponent}
           {image && <Image source={image} style={styles.img} />}

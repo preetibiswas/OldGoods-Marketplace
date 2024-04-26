@@ -21,10 +21,11 @@ const menuItem = [
       name: 'email',
       backgroundColor: colors.secondary,
     },
+    target: 'Messages',
   },
 ];
 
-export default function AccountScreen() {
+export default function AccountScreen({navigation}) {
   return (
     <Screen style={styles.screen}>
       <View style={styles.container}>
@@ -40,6 +41,7 @@ export default function AccountScreen() {
           keyExtractor={menuitem => menuitem.title}
           renderItem={({item}) => (
             <ListItem
+              onpress={() => navigation.navigate(item.target)}
               title={item.title}
               ImageComponent={
                 <AppIcon
@@ -62,7 +64,7 @@ export default function AccountScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 20,
+    marginVertical: 15,
   },
   screen: {
     backgroundColor: colors.light,

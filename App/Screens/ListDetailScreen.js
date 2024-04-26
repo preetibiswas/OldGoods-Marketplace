@@ -5,13 +5,14 @@ import AppText from '../component/AppText';
 import colors from '../Config/colors';
 import ListItem from '../component/ListItem';
 
-export default function ListDetailScreen({title, subtitle}) {
+export default function ListDetailScreen({route}) {
+  const Listing = route.params;
   return (
     <View>
-      <Image source={require('../assets/jacket.jpg')} style={styles.img} />
+      <Image source={Listing.image} style={styles.img} />
       <View style={styles.detailCont}>
-        <AppText style={styles.title}>{title}</AppText>
-        <AppText style={styles.subtitle}>{subtitle}</AppText>
+        <AppText style={styles.title}>{Listing.title}</AppText>
+        <AppText style={styles.subtitle}>{Listing.price}</AppText>
         <View style={styles.userCont}>
           <ListItem
             image={require('../assets/mosh.jpg')}
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
     height: 300,
   },
   detailCont: {
-    padding: 20,
+    padding: 10,
   },
   title: {
     fontSize: 24,
@@ -43,6 +44,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   userCont: {
-    marginVertical: 40,
+    marginVertical: 10,
   },
 });
