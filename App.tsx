@@ -42,6 +42,7 @@ import AppNavigator from './App/navigator/AppNavigation';
 
 export default function App() {
   const [imageuris, setImageuris] = useState([]);
+  console.log('preeti nisse');
 
   const [isEnabled, setIsEnabled] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState(null);

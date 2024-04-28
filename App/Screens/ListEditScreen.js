@@ -11,8 +11,11 @@ import ImageInputList from '../component/ImageInputList';
 import FormImagePicker from '../component/Forms/FormImagePicker';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
+import UploadScreen from './UploadScreen';
 export default function ListEditScreen() {
   const [imagUrl, setImagUrl] = useState('');
+  const [uploadVisible, setUploadVisible] = useState(false);
+  const [progress, setProgress] = useState(0);
   const categories = [
     {label: 'Furniture', value: 1},
     {label: 'Clothing', value: 2},
@@ -35,34 +38,95 @@ export default function ListEditScreen() {
   //       console.log(user);
   //     });
   // };
-  const submitValue = async value => {
+  // const submitValue = async value => {
+  //   try {
+  //     const filePath = value.images[0]; // Assuming you're uploading the first image in the array
+  //     const reference = storage().ref(filePath);
+  //     await reference.putFile(filePath);
+
+  //   const uploadTask = reference.putFile(filePath);
+
+  //     const downloadURL = await reference.getDownloadURL();
+  //     console.log('Download URL:', downloadURL);
+  //     setImagUrl(downloadURL);
+
+  //     await firestore()
+  //       .collection('ListingDetail')
+  //       .add({
+  //         title: value.title,
+  //         price: value.price,
+  //         description: value.description,
+  //         images: value.images,
+  //         category: value.category.label,
+  //       })
+  //       .then(() => {
+  //         console.log('UserDtate');
+  //       });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  const submitValue = async (value, {resetForm}) => {
     try {
+      setUploadVisible(true);
+      setProgress(0);
       const filePath = value.images[0]; // Assuming you're uploading the first image in the array
       const reference = storage().ref(filePath);
-      await reference.putFile(filePath);
-      const downloadURL = await reference.getDownloadURL();
-      console.log('Download URL:', downloadURL);
-      setImagUrl(downloadURL);
 
-      await firestore()
-        .collection('ListingDetail')
-        .add({
-          title: value.title,
-          price: value.price,
-          description: value.description,
-          images: value.images,
-          category: value.category.label,
-        })
-        .then(() => {
-          console.log('UserDtate');
-        });
+      // Upload the file and get the upload task
+      const uploadTask = reference.putFile(filePath);
+
+      // Listen for state changes, errors, and completion of the upload
+      uploadTask.on(
+        'state_changed',
+        snapshot => {
+          // Track progress here
+          const progres =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + progres + '% done');
+          setProgress(progres);
+        },
+        error => {
+          // Handle unsuccessful uploads
+          console.error('Upload error:', error);
+        },
+        () => {
+          // Handle successful uploads on complete
+          uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+            console.log('File available at', downloadURL);
+            setImagUrl(downloadURL);
+
+            // Add data to Firestore after successful upload
+            firestore()
+              .collection('ListingDetail')
+              .add({
+                title: value.title,
+                price: value.price,
+                description: value.description,
+                images: value.images,
+                category: value.category.label,
+              })
+              .then(() => {
+                setUploadVisible(false);
+                console.log('Data added to Firestore successfully');
+              })
+              .catch(error => {
+                console.error('Error adding data to Firestore:', error);
+              });
+          });
+        },
+      );
     } catch (error) {
-      console.log(error);
+      setUploadVisible(false);
+      console.error('Upload process error:', error);
     }
+    resetForm();
   };
+
   return (
     <Screen style={styles.scrn}>
       <StatusBar backgroundColor={colors.primary} />
+      <UploadScreen progress={progress} visible={uploadVisible} />
       <AppForm
         validationSchema={validationSchema}
         initialValues={{
